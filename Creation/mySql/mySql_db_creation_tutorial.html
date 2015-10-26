@@ -1,0 +1,54 @@
+<h1>How to setup mySql Db</h1>
+<div class="main">
+	<ol>
+		<li>
+			To enter in mysql type in terminal:
+			
+			<p><myCite>mysql -uroot -h localhost </myCite></p>
+		</li>
+		<li>
+			After this you should be inside mysql. Try to enter a commnad:
+			<p><myCite>show databases;</myCite></p>
+			If some results appeared, all is fine.
+			<br></br>
+		</li>
+		<li>
+			After entering mysql, execute 2 commands:
+			<p><myCite>source [..your path to file../MySQL-QAL-Creation.sql</myCite></p>
+			<p><myCite>source [..your path to file..]/MySQL-QAL-Data.sql</myCite></p>
+			If no errors happened, databases has been created.
+			<br></br>
+		</li>
+
+		<li>
+			In order to check, enter a command:
+			<p><myCite>show databases;</myCite></p>
+			You shoud see database "qalight".
+		</li>
+	</ol>
+</div>
+
+
+
+<style type="text/css">
+	myCite {
+		background: #000;
+		font-family: sans-serif;
+		font-size: 14px;
+		color: #FFFFFF;
+		padding-left: 10px;
+		padding-right: 10px;
+		padding-top: 3px;
+		padding-bottom: 3px;
+	}
+
+	.main {
+		font-size: 18px;
+		font-family: serif;
+	}
+
+	p {
+		margin-bottom: 8px;
+		margin-top: 8px;
+	}
+</style>
