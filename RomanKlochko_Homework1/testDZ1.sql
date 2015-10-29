@@ -5,29 +5,29 @@ select students.NAME, students.SURNAME, exam_marks.MARK, subjects.NAME
 from students
 join exam_marks
 on students.ID=exam_marks.STUDENT_ID
-join SUBJECTS
-on exam_marks.SUBJ_ID=subjects.ID
+join subjects
+on exam_marks.SUBJ_ID=subjects.ID;
 
 -- проверка:
 begin transaction;
 
 select *
-from students
+from students;
 
 select *
-from exam_marks
+from exam_marks;
 
 insert into students
-values (46,'Алеша','Панасюк','m', 900.00,1,'Харьков',NULL,8)
+values (46,'Алеша','Панасюк','m', 900.00,1,'Харьков',NULL,8);
 
 insert into exam_marks
 values(46,5,5,getdate());
 
 delete from students
-where ID=46
+where ID=46;
 
 delete from exam_marks
-where ID=123
+where ID=123;
 
 rollback;
 
@@ -35,34 +35,34 @@ rollback;
 
 select lecturers.NAME, lecturers.SURNAME, subjects.NAME
 from lecturers
-join SUBJ_LECT
-on subj_lect.LECTURER_ID=LECTURERS.ID
+join subj_lect
+on subj_lect.LECTURER_ID=lecturers.ID
 join subjects
-on subj_lect.SUBJ_ID=SUBJECTS.ID
+on subj_lect.SUBJ_ID=subjects.ID;
 
 --проверка
 begin transaction;
 
 select *
-from lecturers
+from lecturers;
 
 select *
-from subj_lect
+from subj_lect;
 
 select *
-from subjects
+from subjects;
 
 insert into lecturers
-values (26,'Кухарь','ВЛ','Харьков', 2)
+values (26,'Кухарь','ВЛ','Харьков', 2);
 
 insert into subj_lect
 values(26,6);
 
 delete from subj_lect
-where LECTURER_ID=26
+where LECTURER_ID=26;
 
 delete from lecturers
-where ID=26
+where ID=26;
 
 rollback;
 
@@ -72,22 +72,22 @@ rollback;
 select students.NAME, students.SURNAME, students.CITY as Native, universities.CITY as University, universities.NAME
 from students
 left join universities
-on students.UNIV_ID=UNIVERSITIES.ID
+on students.UNIV_ID=universities.ID;
 
 --проверка
 begin transaction;
 
 select *
-from UNIVERSITIES
+from universities;
 
 select *
-from STUDENTS
+from students;
 
 insert into students
-values (46,'Алеша','Панасюк','m', 900.00,1,'Харьков',NULL,8)
+values (46,'Алеша','Панасюк','m', 900.00,1,'Харьков',NULL,8);
 
 delete from students
-where ID=46
+where ID=46;
 
 rollback;
 
@@ -95,19 +95,19 @@ rollback;
 --- дату его рождения и курс на котором он учится
 
 select students.NAME, students.SURNAME, students.GENDER, students.BIRTHDAY, students.COURSE
-from students
+from students;
 
 ---проверка
 begin transaction;
 
 select *
-from STUDENTS
+from students;
 
 insert into students
-values (46,'Алеша','Панасюк','m', 900.00,1,'Харьков',NULL,8)
+values (46,'Алеша','Панасюк','m', 900.00,1,'Харьков',NULL,8);
 
 delete from students
-where ID=46
+where ID=46;
 
 rollback;
 
@@ -117,23 +117,23 @@ rollback;
 select lecturers.NAME, lecturers.SURNAME, lecturers.CITY, universities.CITY, universities.NAME
 from lecturers
 join universities
-on lecturers.UNIV_ID=universities.ID
+on lecturers.UNIV_ID=universities.ID;
 
 --проверка
 begin transaction;
 
 select *
-from lecturers
+from lecturers;
 
 select *
-from universities
+from universities;
 
 
 insert into lecturers
-values (26,'Кухарь','ВЛ','Харьков', 2)
+values (26,'Кухарь','ВЛ','Харьков', 2);
 
 delete from lecturers
-where ID=26
+where ID=26;
 
 rollback;
 
@@ -145,30 +145,30 @@ from students
 join exam_marks
 on students.ID=exam_marks.STUDENT_ID
 join subjects
-on exam_marks.SUBJ_ID=subjects.ID
+on exam_marks.SUBJ_ID=subjects.ID;
 
 ---проверка
 begin transaction;
 
 select *
-from STUDENTS
+from students;
 
 select *
-from exam_marks
+from exam_marks;
 
 select *
-from subjects
+from subjects;
 
 insert into students
-values (46,'Алеша','Панасюк','m', 900.00,1,'Харьков',NULL,8)
+values (46,'Алеша','Панасюк','m', 900.00,1,'Харьков',NULL,8);
 
 insert into exam_marks
 values(46,5,5,getdate());
 
 delete from students
-where ID=46
+where ID=46;
 
 delete from exam_marks
-where ID=123
+where ID=123;
 
 rollback;
