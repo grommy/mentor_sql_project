@@ -28,7 +28,34 @@ select num_b, num_a, calldate
 from calls
 where calldate='2011-09-22 00:00:00';
 
+/*----------Universal code by mentor----------;*/
+SELECT
+    num_b,
+    num_a,
+    calldate
+FROM
+    calls
+WHERE
+    calldate =(
+        SELECT
+            max_date
+        FROM
+            (
+                SELECT
+                    num_b as smth,
+                    MAX( calldate ) AS max_date
+                FROM
+                    calls
+                GROUP BY
+                    num_b
+            ) AS max_dates
+        WHERE
+            num_b = smth
+    )
+ORDER BY
+    num_b;
 
+/*----------------------------------*/
 
 
 select num_b, num_a, calldate
@@ -53,10 +80,10 @@ order by num_b;
 
 select num_b as a, num_a, calldate
 from calls
-where 
+where
 	calldate=
 		(select from
-			(   select num_b, max(calldate) 
+			(   select num_b, max(calldate)
 				from calls
 				group by num_b )
 		 where num_b=a)
@@ -65,7 +92,7 @@ order by num_b;
 
 
 
-select num_b, max(calldate) 
+select num_b, max(calldate)
 from calls
 group by num_b;
 
@@ -96,8 +123,3 @@ from calls
 where calldate>='2011-09-20'
 group by num_b) as tp)
 );
-
-
-
-
-
