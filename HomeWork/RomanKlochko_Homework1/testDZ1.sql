@@ -6,7 +6,16 @@ from students
 join exam_marks
 on students.ID=exam_marks.STUDENT_ID
 join subjects
-on exam_marks.SUBJ_ID=subjects.ID;
+on exam_marks.SUBJ_ID=subjects.ID
+order by students.NAME;
+
+select count(*)
+from students
+join exam_marks
+on students.ID=exam_marks.STUDENT_ID
+join subjects
+on exam_marks.SUBJ_ID=subjects.ID
+order by students.NAME;
 
 -- проверка:
 begin transaction;
