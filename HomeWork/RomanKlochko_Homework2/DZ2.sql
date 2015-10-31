@@ -17,17 +17,6 @@ where num_b=01;
 ---3) Выбрать самые «свежие» звонки на номера всех экстренных служб.
 ----- Результат отсортировать по номеру экстренной службы.
 
-select num_b,num_a,calldate
-from calls
-having calldate=(select max(calldate) from calls)
-order by num_b;
-
-select max(calldate) from calls;
-
-select num_b, num_a, calldate
-from calls
-where calldate='2011-09-22 00:00:00';
-
 /*----------Universal code by mentor----------;*/
 SELECT
     num_b,
@@ -76,25 +65,6 @@ where num_b=04 and calldate=(select max(calldate) from calls where num_b=04)
 order by num_b;
 
 
-
-
-select num_b as a, num_a, calldate
-from calls
-where
-	calldate=
-		(select from
-			(   select num_b, max(calldate)
-				from calls
-				group by num_b )
-		 where num_b=a)
-
-order by num_b;
-
-
-
-select num_b, max(calldate)
-from calls
-group by num_b;
 
 ---4) Выбрать сведения о звонках  на номер экстренной службы,
 ----- наиболее «популярной» в последние три дня («текущим» днем считать 22.09.2011)
