@@ -28,7 +28,34 @@ select num_b, num_a, calldate
 from calls
 where calldate='2011-09-22 00:00:00';
 
+/*----------Universal code by mentor----------;*/
+SELECT
+    num_b,
+    num_a,
+    calldate
+FROM
+    calls
+WHERE
+    calldate =(
+        SELECT
+            max_date
+        FROM
+            (
+                SELECT
+                    num_b as smth,
+                    MAX( calldate ) AS max_date
+                FROM
+                    calls
+                GROUP BY
+                    num_b
+            ) AS max_dates
+        WHERE
+            num_b = smth
+    )
+ORDER BY
+    num_b;
 
+/*----------------------------------*/
 
 
 select num_b, num_a, calldate
@@ -53,10 +80,10 @@ order by num_b;
 
 select num_b as a, num_a, calldate
 from calls
-where 
+where
 	calldate=
 		(select from
-			(   select num_b, max(calldate) 
+			(   select num_b, max(calldate)
 				from calls
 				group by num_b )
 		 where num_b=a)
@@ -65,39 +92,9 @@ order by num_b;
 
 
 
-select num_b, max(calldate) 
+select num_b, max(calldate)
 from calls
 group by num_b;
 
 ---4) Выбрать сведения о звонках  на номер экстренной службы,
 ----- наиболее «популярной» в последние три дня («текущим» днем считать 22.09.2011)
-
-select *
-from calls;
-
-select MAX(tp.pop)
-from
-(select num_b,  count(*) pop
-from calls
-where calldate>='2011-09-20'
-group by num_b) as tp;
-
-select *
-from calls as c1
-where exists (
-select *
-from calls as c2
-where c1.num_b=c2.num_b and calldate>='2011-09-20'
-group by c2.num_b
-having count(*)=(select MAX(tp.pop)
-from
-(select num_b,  count(*) pop
-from calls
-where calldate>='2011-09-20'
-group by num_b) as tp)
-);
-
-
-
-
-
