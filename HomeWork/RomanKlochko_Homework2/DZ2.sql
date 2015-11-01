@@ -96,5 +96,20 @@ select num_b, max(calldate)
 from calls
 group by num_b;
 
----4) Выбрать сведения о звонках  на номер экстренной службы,
------ наиболее «популярной» в последние три дня («текущим» днем считать 22.09.2011)
+/*---4) Выбрать сведения о звонках  на номер экстренной службы,
+----- наиболее «популярной» в последние три дня («текущим» днем считать 22.09.2011)*/
+
+select * from calls
+where num_b=
+		(select num_b as number_popular
+		from (
+    			select num_b, count(*) as calls_count
+    			from calls
+    			where calldate>'2011-09-20'
+    			group by num_b
+    			order by calls_count DESC
+    			limit 1
+          ) as max_calls_table
+    )
+
+;
