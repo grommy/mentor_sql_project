@@ -113,3 +113,24 @@ where num_b=
     )
 
 ;
+
+/*alternative solution */
+
+select num_b from
+                            (
+                            select num_b, count(*) as counter
+                            from calls
+                            where calldate>"2011-09-20"
+                            group by num_b                                                      
+                            ) as table1
+where counter = (
+                Select max(counter) from 
+                                        (
+                                        select num_b as number, count(*) as counter
+                                            from calls
+                                            where calldate>"2011-09-20"
+                                            group by num_b
+                                        ) as table2
+                ) 
+;
+
